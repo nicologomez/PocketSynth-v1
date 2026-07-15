@@ -67,4 +67,23 @@ document.getElementById("demoBtn").onclick = useStarterSong; document.getElement
 document.getElementById("saveSessionBtn").onclick = exportSession; document.getElementById("importSessionInput").onchange = (event) => importSession(event.target.files[0]); document.getElementById("exportVideoBtn").onclick = exportPerformanceVideo;
 document.getElementById("helpOverlay").addEventListener("click", (event) => { if (event.target.id === "helpOverlay") setHelp(false); });
 document.getElementById("volume").oninput = (event) => { document.getElementById("volumeValue").textContent = `${event.target.value}%`; if (masterGain) masterGain.gain.setTargetAtTime(Number(event.target.value) / 100, audioContext.currentTime, 0.02); };
+
+// Disable right-click and long-press menus inside the app
+document.addEventListener("contextmenu", (event) => {
+  event.preventDefault();
+});
+
+// Prevent accidental element dragging
+document.addEventListener("dragstart", (event) => {
+  event.preventDefault();
+});
+
+// Prevent accidental double-click zoom
+document.addEventListener(
+  "dblclick",
+  (event) => {
+    event.preventDefault();
+  },
+  { passive: false }
+);
 updateScreen(); updateTapeUI();
