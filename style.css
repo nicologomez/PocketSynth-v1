@@ -8,3 +8,49 @@
 .help-overlay { position: fixed; z-index: 10; inset: 0; display: grid; place-items: center; padding: 24px; background: #050709d9; }.help-overlay[hidden] { display: none; }.help-card { position: relative; width: min(680px, 100%); padding: clamp(25px, 5vw, 48px); border: 2px solid #90a1a4; border-radius: 20px; color: #172027; background: #e9eeee; box-shadow: 0 28px 90px #000; }.close-help { position: absolute; top: 16px; right: 16px; width: 34px; height: 34px; border: 0; border-radius: 50%; background: #cbd4d4; font-size: 23px; }.guide-kicker { color: #ff5700; font-weight: 900; font-size: 10px; letter-spacing: .15em; }.help-card h1 { margin: 7px 0 29px; font-size: clamp(30px, 6vw, 47px); letter-spacing: -.06em; }.guide-steps { display: grid; gap: 15px; }.guide-steps article { display: grid; grid-template-columns: 38px 1fr; gap: 12px; }.guide-steps b { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; color: white; background: #00a1db; }.guide-steps h2 { margin: 0; font-size: 15px; }.guide-steps p { margin: 4px 0 0; color: #516168; font-size: 13px; line-height: 1.45; }.guide-footer { margin: 27px 0 15px; color: #69777c; font-size: 10px; line-height: 1.4; }.start-button { width: 100%; padding: 13px; border: 0; border-radius: 7px; color: white; background: #1b282e; font-weight: 900; letter-spacing: .1em; }
 @media (max-width: 850px) { .worktop { grid-template-columns: 115px 1fr; }.encoder-row { grid-column: 1 / -1; min-height: 110px; }.speaker { min-height: 120px; }.keyboard { grid-template-columns: repeat(12, 1fr); }.music-key { height: 105px; }.control-strip { flex-wrap: wrap; }.tempo-control, .volume-control { min-width: 42%; min-height: 58px; }.tape-head span:last-child { display: none; }.layer-grid { grid-template-columns: repeat(3, 1fr); }.layer-count { grid-column: 1 / -1; width: max-content; } }
 @media (max-width: 520px) { body { padding: 7px; }.instrument { border-radius: 15px; }.topbar { padding: 0 14px; }.brand small { display: none; }.worktop { grid-template-columns: 1fr; }.speaker { display: none; }.screen { margin: 14px; }.encoder-row { min-height: 88px; }.encoder::before { width: 43px; height: 43px; }.encoder span { font-size: 8px; }.small-control { min-width: 73px; }.tape { padding: 13px; }.transport { gap: 5px; }.transport-button { min-width: 0; flex: 1; }.transport-button span { display: none; }.keyboard { padding: 11px; }.music-key { height: 83px; }.music-key span { bottom: 25px; font-size: 8px; }.music-key kbd { bottom: 6px; font-size: 8px; } footer { display: block; line-height: 1.7; } }
+
+/* Prevent accidental zooming, highlighting, and text selection */
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  overscroll-behavior: none;
+  -webkit-text-size-adjust: 100%;
+}
+
+body,
+button,
+kbd,
+.music-key {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* Removes the gray highlight shown while tapping */
+button,
+.music-key,
+[data-control] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevents double-tap zoom while preserving normal taps */
+button,
+.music-key,
+[data-control] {
+  touch-action: manipulation;
+}
+
+/* Treat the keyboard like an instrument surface */
+#keyboard,
+.music-key {
+  touch-action: none;
+}
+
+/* Prevent images and interface elements from being dragged */
+img,
+button,
+.music-key {
+  -webkit-user-drag: none;
+  user-drag: none;
+}
